@@ -2,7 +2,8 @@
   <!-- <div id=''> -->
   <div>
     <label for="receipt">
-      <svg viewBox="0 0 32 32">
+      <img :src="thumbnail" alt="" v-if="receipt">
+      <svg viewBox="0 0 32 32" v-else="receipt">
         <path fill="#1C1C1C" d="M16,12c-3.314,0-6,2.686-6,6s2.686,6,6,6s6-2.686,6-6S19.314,12,16,12z M16,23c-2.761,0-5-2.239-5-5
         s2.239-5,5-5s5,2.239,5,5S18.761,23,16,23z"/>
         <path fill="#1C1C1C" d="M28,9c-1.105,0-2,0.895-2,2c0,1.105,0.895,2,2,2s2-0.895,2-2C30,9.895,29.105,9,28,9z M28,12
@@ -27,6 +28,11 @@ export default {
     return {
       receipt: '',
     };
+  },
+  computed: {
+    thumbnail() {
+      return window.URL.createObjectURL(this.receipt);
+    },
   },
   methods: {
     shutter() {
@@ -60,7 +66,7 @@ export default {
     flex-direction: column;
   }
 
-   svg {
+   svg, img {
     /*width: 100%;*/
     height: 90%;
     padding: 5%;
