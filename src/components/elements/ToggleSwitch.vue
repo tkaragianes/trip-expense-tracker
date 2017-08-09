@@ -12,7 +12,7 @@ export default {
   data: function data() {
     return {
       selected: false,
-      value: '',
+      value: this.falseValue,
     };
   },
   methods: {
