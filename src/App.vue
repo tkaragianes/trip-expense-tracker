@@ -5,7 +5,11 @@
 </template>
 
 <script>
+import PouchDB from 'pouchdb';
 import AppShell from './components/layout/AppShell';
+
+const db = new PouchDB('ET_transactions');
+console.log(db);
 
 export default {
   name: 'app',
