@@ -6,11 +6,11 @@
         <label for="description">Description</label>
         <input type="text" name="description" v-model="description">
       </section>
-      <section class="half-width">
+      <section class="half-width" style="width: calc(66% - 5px);">
         <label for="date">Date</label>
         <input type="date" name="date" v-model="date">
       </section>
-      <section class="half-width">
+      <section class="half-width" style="width: calc(33% - 5px);">
         <label for="amount">Amount</label>
         <input type="number" name="amount" v-model="amount">
       </section>
@@ -22,12 +22,10 @@
         <label for="colleagues">Colleague Attendance</label>
         <input type="text" name="colleagues" v-model="colleagues">
       </section>
-      <section>
+      <section class="" style="width: calc(33% - 5px); display: inline-block;">
         <p>Alcohol?</p>
-        <label for="radio-a">Yes</label>
-        <input type="radio" id="radio-a" name="type" value="alcohol purchased" v-model="alcohol">
-        <label for="radio-b">No</label>
-        <input type="radio" id="radio-b" name="type" value="no alcohol" v-model="alcohol">
+        <toggle-switch @toggle="(value) => {this.alcohol = value;}"
+        true-value="Alcohol present" false-value="No alcohol"></toggle-switch>
       </section>
       <!-- <section>
         <p>Transaction Type</p>
@@ -36,7 +34,7 @@
         <label for="radio-b">Travel</label>
         <input type="radio" id="radio-b" name="type" value="travel">
       </section> -->
-      <section class="camera-input">
+      <section class="camera-input" style="width: calc(66% - 5px); display: inline-block;">
         <camera-input @capture="captureHandler"></camera-input>
       </section>
       <section>
@@ -46,36 +44,65 @@
   </div>
 </template>
 <script>
+import PouchDB from 'pouchdb';
 import CameraInput from './elements/CameraInput';
+import ToggleSwitch from './elements/ToggleSwitch';
+
+
+const db = PouchDB('ET_transactions');
 
 export default {
   name: 'add-age',
   components: {
     CameraInput,
+    ToggleSwitch,
   },
   data: function data() {
     return {
       description: '',
       date: '',
       amount: '',
-      donors: '',
-      colleagues: '',
+      donors: [],
+      colleagues: [],
       alcohol: '',
       receipt: '',
+      sentTo: [],
     };
   },
   methods: {
     submitHandler() {
       const doc = {
-        _id: Date.now(),
+        _id: Date.now().toString(),
         description: this.description,
         date: this.date,
         amount: this.amount,
         donors: this.donors,
         colleagues: this.colleagues,
         alcohol: this.alcohol,
-        receipt: this.receipt,
+        _attachments: {
+          receipt: {
+            content_type: this.receipt.type,
+            data: this.receipt,
+          },
+        },
+        // receipt: this.receipt,
       };
+
+      db.put(doc).then((response) => {
+        // handle response
+        console.log(response);
+        // Reset Form
+        this.description = '';
+        this.date = '';
+        this.amount = '';
+        this.donors = [];
+        this.colleagues = [];
+        this.alcohol = '';
+        this.receipt = '';
+        this.sentTo = [];
+      }).catch((err) => {
+        console.log(err);
+      });
 
       console.log(doc);
     },
