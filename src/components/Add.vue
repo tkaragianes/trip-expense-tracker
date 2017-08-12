@@ -38,6 +38,10 @@
         <camera-input @capture="captureHandler"></camera-input>
       </section>
       <section>
+        <label for="notes">Notes</label>
+        <textarea name="notes" v-model="notes"></textarea>
+      </section>
+      <section>
         <button type="button" name="button" class="submit-button" @click="submitHandler">Submit</button>
       </section>
     </form>
@@ -45,6 +49,7 @@
 </template>
 <script>
 import PouchDB from 'pouchdb';
+// import { EventBus } from './event-bus';
 import CameraInput from './elements/CameraInput';
 import ToggleSwitch from './elements/ToggleSwitch';
 
@@ -52,7 +57,7 @@ import ToggleSwitch from './elements/ToggleSwitch';
 const db = PouchDB('ET_transactions');
 
 export default {
-  name: 'add-age',
+  name: 'add-page',
   components: {
     CameraInput,
     ToggleSwitch,
@@ -66,6 +71,7 @@ export default {
       colleagues: [],
       alcohol: '',
       receipt: '',
+      notes: '',
       sentTo: [],
     };
   },
@@ -79,6 +85,7 @@ export default {
         donors: this.donors,
         colleagues: this.colleagues,
         alcohol: this.alcohol,
+        notes: this.notes,
         _attachments: {
           receipt: {
             content_type: this.receipt.type,
@@ -92,6 +99,8 @@ export default {
         // handle response
         console.log(response);
         // Reset Form
+        this.$bus.$emit('FORM_RESET');
+
         this.description = '';
         this.date = '';
         this.amount = '';
@@ -99,6 +108,7 @@ export default {
         this.colleagues = [];
         this.alcohol = '';
         this.receipt = '';
+        this.notes = '';
         this.sentTo = [];
       }).catch((err) => {
         console.log(err);
@@ -117,7 +127,7 @@ export default {
     margin-bottom: 50px;
   }
 
-  input[type="text"], input[type="number"], input[type="date"] {
+  input[type="text"], input[type="number"], input[type="date"], textarea {
     border: 1px solid #dddddd;
     width: 100%;
     font-size: 1.25rem;

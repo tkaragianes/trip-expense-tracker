@@ -7,9 +7,11 @@
 <script>
 import PouchDB from 'pouchdb';
 import AppShell from './components/layout/AppShell';
+import EventBus from './components/event-bus';
 
 const db = new PouchDB('ET_transactions');
 console.log(db);
+console.log(EventBus);
 
 export default {
   name: 'app',

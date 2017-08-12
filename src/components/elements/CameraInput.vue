@@ -29,27 +29,35 @@ export default {
       receipt: '',
     };
   },
+  created() {
+    this.$bus.$on('FORM_RESET', () => {
+      this.receipt = '';
+    });
+  },
   computed: {
     thumbnail() {
       return window.URL.createObjectURL(this.receipt);
     },
   },
   methods: {
-    shutter() {
-      navigator.mediaDevices.getUserMedia({ video: true, audio: false })
-      .then((stream) => {
-        console.log(stream);
-        // video.srcObject = stream;
-        // video.play();
-      })
-      .catch((err) => {
-        console.log(`An error occured! ${err}`);
-      });
-    },
+    // Shutter method inactive because I'm using the input file type and the
+    // native browser behavior for image captureHandler. May switch to getUserMedia
+    // in the future for more cohesive UX.
+    //
+    // shutter() {
+    //   navigator.mediaDevices.getUserMedia({ video: true, audio: false })
+    //   .then((stream) => {
+    //     console.log(stream);
+    //     // video.srcObject = stream;
+    //     // video.play();
+    //   })
+    //   .catch((err) => {
+    //     console.log(`An error occured! ${err}`);
+    //   });
+    // },
     imageHandler(event) {
       const file = event.target.files[0];
       this.receipt = file;
-      console.log(this.receipt);
       this.$emit('capture', file);
     },
   },

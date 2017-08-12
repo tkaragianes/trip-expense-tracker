@@ -1,11 +1,13 @@
 <template>
   <label class="toggle-switch">
-    <input type="checkbox" @change="clickHandler"/>
+    <input type="checkbox" @change="clickHandler" :checked="selected"/>
     <div class="checkbox"></div>
   </label>
 </template>
 
 <script>
+// import
+
 export default {
   name: 'toggle-switch',
   props: ['trueValue', 'falseValue'],
@@ -14,6 +16,12 @@ export default {
       selected: false,
       value: this.falseValue,
     };
+  },
+  created() {
+    this.$bus.$on('FORM_RESET', () => {
+      this.selected = false;
+      this.value = this.falseValue;
+    });
   },
   methods: {
     clickHandler(event) {
