@@ -43,6 +43,7 @@ export default {
     width: 100vw;
     /*background-color: #4366ee;*/
     border-top: 1px solid #dddddd;
+    z-index: 5;
   }
 
   nav button {

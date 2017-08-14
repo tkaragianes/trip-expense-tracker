@@ -1,5 +1,5 @@
 <template>
-  <section :class="{'collapsed': this.collapsed}" class="box" @click="clickHandler">
+  <section :class="{'collapsed': this.collapsed}" class="box list-item" @click="clickHandler">
     <div class="first-row">
       <div class="column column-40">
         <h6>Date</h6>
@@ -52,7 +52,6 @@ export default {
       return new Date(this.expense.date).toDateString().slice(4);
     },
     imageURL() {
-      console.log(this.expense);
       if (this.expense._attachments.receipt.data && this.toggled) {
         return `data:img/jpeg;base64, ${this.expense._attachments.receipt.data}`;
       }
@@ -70,7 +69,7 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style>
 
   /*section {
     padding: 5px;
@@ -136,18 +135,18 @@ export default {
     width: 50%;
   }
 
-  footer {
+  .list-item footer {
     border-top: 1px solid #dddddd;
     display: flex;
     justify-content: flex-end;
     width: 100%;
   }
 
-  img {
+  .list-item img {
     width: 100%;
   }
 
-  h6 {
+  .list-item h6 {
     margin: 0;
     color: #aaaaaa;
     /*text-transform: uppercase;*/
@@ -156,11 +155,11 @@ export default {
     font-size: 0.7rem;
   }
 
-  p {
+  .list-item p {
     margin: 0;
   }
 
-  .collapsed p {
+ .collapsed p {
     height: 1.5rem;
     overflow: hidden;
     white-space: nowrap;

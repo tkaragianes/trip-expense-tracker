@@ -104,7 +104,7 @@ export default {
 input[type="checkbox"]:checked {}
 
 input[type="checkbox"]:checked + .checkbox {
-  background: #477DCA;
+  background: #8c1515;
 }
 
 input[type="checkbox"]:checked + .checkbox::before {

@@ -1,26 +1,27 @@
 <template>
   <div id='send' class="page-content">
     <h1 class='page-title'>Generate Report</h1>
-    <section>
-      <div class="input-group">
-        <label for="trip">Trip Name</label>
-        <input type="text" name="trip" value="" v-model="trip">
-      </div>
-      <div class="input-group">
-        <label for="trip">Gift Officer</label>
-        <input type="text" name="officer" value="" v-model="officer">
-      </div>
-      <div class="input-group">
-        <label for="trip">Coordinator</label>
-        <input type="text" name="coordinator" value="" v-model="coordinator">
-      </div>
-      <button @click="generatePDF">Generate</button>
-    </section>
+    <div class="input-group control">
+      <label class="label" for="trip">Trip Name</label>
+      <input class="input" type="text" name="trip" value="" v-model="trip">
+    </div>
+    <div class="input-group control">
+      <label class="label" for="trip">Gift Officer</label>
+      <input class="input" type="text" name="officer" value="" v-model="officer">
+    </div>
+    <div class="input-group control">
+      <label class="label" for="trip">Coordinator</label>
+      <input class="input" type="text" name="coordinator" value="" v-model="coordinator">
+    </div>
+    <h2 class="label">Select Expenses</h2>
     <ul>
       <li v-for="expense in transactions">
         <SendItem :expense="expense" @select="selectItem"></SendItem>
       </li>
     </ul>
+    <section>
+      <button @click="generatePDF">Generate</button>
+    </section>
   </div>
 </template>
 <script>
@@ -120,6 +121,7 @@ export default {
         // console.log(this.selected[i]);
         const index = i + 1;
         const expense = this.transactions[index];
+        console.log(expense);
         // const pagebreak = index == length ? '' : pageBreak: 'after',
 
         docDefinition.content.push(
@@ -211,8 +213,11 @@ export default {
 
   button {
     width: 100%;
-    padding: 3px;
-    background-color: #dddddd;
-    border: 1px solid #aaaaaa;
+    border: 2px solid #8c1515;
+    background-color: #8c1515;
+    color: #FFFFFF;
+    font-size: 1.3rem;
+    box-shadow: none;
+    margin-top: 10px;
   }
 </style>

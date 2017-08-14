@@ -2,44 +2,37 @@
   <div id='add-page' class="page-content">
     <h1 class="page-title">Add Transaction</h1>
     <form class="add-transaction-form" action="" method="">
-      <section>
-        <label for="description">Description</label>
-        <input type="text" name="description" v-model="description">
+      <section class="control">
+        <label class="label" for="description">Description</label>
+        <input class="input" type="text" name="description" v-model="description">
       </section>
-      <section class="half-width" style="width: calc(66% - 5px);">
-        <label for="date">Date</label>
-        <input type="date" name="date" v-model="date">
+      <section class="half-width control" style="width: calc(66% - 5px);">
+        <label class="label" for="date">Date</label>
+        <input class="input" type="date" name="date" v-model="date">
       </section>
-      <section class="half-width" style="width: calc(33% - 5px);">
-        <label for="amount">Amount</label>
-        <input type="number" name="amount" v-model="amount">
+      <section class="half-width control" style="width: calc(33% - 5px);">
+        <label class="label" for="amount">Amount</label>
+        <input class="input" type="number" name="amount" v-model="amount">
       </section>
-      <section>
-        <label for="donors">Donor Attendance</label>
-        <input type="text" name="donors" v-model="donors">
+      <section class="control">
+        <label class="label" for="donors">Donor Attendance</label>
+        <input class="input" type="text" name="donors" v-model="donors">
       </section>
-      <section>
-        <label for="colleagues">Colleague Attendance</label>
-        <input type="text" name="colleagues" v-model="colleagues">
+      <section class="control">
+        <label class="label" for="colleagues">Colleague Attendance</label>
+        <input class="input" type="text" name="colleagues" v-model="colleagues">
       </section>
-      <section class="" style="width: calc(33% - 5px); display: inline-block;">
-        <p>Alcohol?</p>
+      <section class="control" style="width: calc(33% - 5px); display: inline-block;">
+        <label for="" class="label">Alcohol?</label>
         <toggle-switch @toggle="(value) => {this.alcohol = value;}"
         true-value="Alcohol present" false-value="No alcohol"></toggle-switch>
       </section>
-      <!-- <section>
-        <p>Transaction Type</p>
-        <label for="radio-a">Business</label>
-        <input type="radio" id="radio-a" name="type" value="business">
-        <label for="radio-b">Travel</label>
-        <input type="radio" id="radio-b" name="type" value="travel">
-      </section> -->
       <section class="camera-input" style="width: calc(66% - 5px); display: inline-block;">
         <camera-input @capture="captureHandler"></camera-input>
       </section>
-      <section>
-        <label for="notes">Notes</label>
-        <textarea name="notes" v-model="notes"></textarea>
+      <section class="control">
+        <label class="label" for="notes">Notes</label>
+        <textarea class="textarea" name="notes" v-model="notes"></textarea>
       </section>
       <section>
         <button type="button" name="button" class="submit-button" @click="submitHandler">Submit</button>
@@ -163,8 +156,9 @@ export default {
 
   .submit-button {
     width: 100%;
-    border: 2px solid #cccccc;
-    background-color: #ffffff;;
+    border: 2px solid #8c1515;
+    background-color: #8c1515;
+    color: #FFFFFF;
     font-size: 1.3rem;
     box-shadow: none;
   }

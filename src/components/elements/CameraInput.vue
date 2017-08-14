@@ -68,10 +68,12 @@ export default {
     width: 100%;
     height: 100%;
     border: 1px solid #dddddd;
+    box-shadow: inset 0 1px 2px rgba(10,10,10,.1);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    background-color: #FFFFFF;
   }
 
    svg, img {
