@@ -26,6 +26,11 @@ export default {
   },
   created: function created() {
     this.fetchData();
+
+    this.$bus.$on('DELETE_ITEM', (id) => {
+      const pos = this.transactions.map(el => el.id).indexOf(id);
+      this.transactions.splice(pos, 1);
+    });
   },
   methods: {
     fetchData() {

@@ -13,8 +13,18 @@ const db = new PouchDB('ET_transactions');
 console.log(db);
 console.log(EventBus);
 
+
 export default {
   name: 'app',
+  created() {
+    this.$bus.$on('DELETE_ITEM', (id) => {
+      db.get(id).then((doc) => {
+        db.remove(doc);
+      }).catch((err) => {
+        console.log(err);
+      });
+    });
+  },
   components: {
     AppShell,
   },
@@ -22,14 +32,6 @@ export default {
 </script>
 
 <style>
-/*#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}*/
 
   * {
     box-sizing: border-box;
@@ -42,6 +44,7 @@ export default {
 
   html {
     font-size: 16px;
+    background-color: #F4F4F4;
   }
 
   .page-content {
@@ -64,6 +67,10 @@ export default {
     height: 3px;
     position: absolute;
     bottom: -5px; left: 0px;
+  }
+
+  #app {
+    margin-bottom: 60px;
   }
 
 </style>

@@ -12,11 +12,17 @@
       </router-link>
     </nav>
     <router-view></router-view>
+    <toast></toast>
   </div>
 </template>
 <script>
+import Toast from './Toast';
+
 export default {
   name: 'app-shell',
+  components: {
+    Toast,
+  },
   data: function data() {
     return {
 

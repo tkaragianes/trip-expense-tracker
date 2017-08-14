@@ -97,6 +97,7 @@ export default {
 
       db.put(doc).then((response) => {
         // handle response
+        this.$bus.$emit('ADD_ITEM_SUCCESS', response.id);
         console.log(response);
         // Reset Form
         this.$bus.$emit('FORM_RESET');

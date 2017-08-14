@@ -1,11 +1,11 @@
 <template>
-  <section :class="{'collapsed': this.collapsed}" @click="clickHandler">
+  <section :class="{'collapsed': this.collapsed}" class="box" @click="clickHandler">
     <div class="first-row">
-      <div class="column">
+      <div class="column column-40">
         <h6>Date</h6>
         <p>{{formattedDate}}</p>
       </div>
-      <div class="column">
+      <div class="column column-40">
         <h6>Description</h6>
         <p>{{expense.description}}</p>
       </div>
@@ -31,9 +31,9 @@
           <img :src="imageURL" alt="">
         </div>
       </div>
-      <div class="edit">
-        <span>Edit</span>
-      </div>
+      <footer>
+        <span @click="deleteItem">Delete</span>
+      </footer>
     </div>
   </section>
 </template>
@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     formattedDate() {
-      return new Date(this.expense.date).toDateString();
+      return new Date(this.expense.date).toDateString().slice(4);
     },
     imageURL() {
       console.log(this.expense);
@@ -64,19 +64,22 @@ export default {
       this.collapsed = !this.collapsed;
       this.toggled = true;
     },
+    deleteItem() {
+      this.$bus.$emit('DELETE_ITEM_REQ', this.expense._id);
+    },
   },
 };
 </script>
 <style scoped>
 
-  section {
+  /*section {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #000000;
     height: 100%;
     transition: all 0.3s;
     box-shadow: 0 4px 5px 0 rgba(0,0,0,0.14), 0 1px 10px 0 rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.3)
-  }
+  }*/
 
   .first-row {
     display: flex;
@@ -97,6 +100,12 @@ export default {
     max-width: 60%;
     min-width: 20%;
     overflow: hidden;
+    padding: 0;
+    margin: 0 3px;
+  }
+
+  .column-40 {
+    flex-grow: 2;
   }
 
   .details {
@@ -127,8 +136,11 @@ export default {
     width: 50%;
   }
 
-  .edit {
+  footer {
     border-top: 1px solid #dddddd;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
   }
 
   img {
@@ -141,9 +153,17 @@ export default {
     /*text-transform: uppercase;*/
     font-weight: 300;
     letter-spacing: 0.1rem;
+    font-size: 0.7rem;
   }
 
   p {
-    margin: 0
+    margin: 0;
+  }
+
+  .collapsed p {
+    height: 1.5rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 </style>
