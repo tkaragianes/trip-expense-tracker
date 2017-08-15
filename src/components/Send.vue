@@ -119,7 +119,7 @@ export default {
 
       for (let i = 0, len = this.selected.length; i < len; i += 1) {
         // console.log(this.selected[i]);
-        const index = i + 1;
+        const index = i;
         const expense = this.transactions[index];
         console.log(expense);
         // const pagebreak = index == length ? '' : pageBreak: 'after',
