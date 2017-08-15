@@ -73,7 +73,7 @@ export default {
       const doc = {
         _id: Date.now().toString(),
         description: this.description,
-        date: this.date,
+        date: new Date(this.date.replace(/-/g, '//').replace(/T.+/, '')),
         amount: this.amount,
         donors: this.donors,
         colleagues: this.colleagues,
