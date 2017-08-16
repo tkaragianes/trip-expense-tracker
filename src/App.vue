@@ -9,7 +9,7 @@ import PouchDB from 'pouchdb';
 import AppShell from './components/layout/AppShell';
 import EventBus from './components/event-bus';
 
-const db = new PouchDB('ET_transactions');
+const db = new PouchDB('ET_transactions', { auto_compaction: true, size: 100 });
 console.log(db);
 console.log(EventBus);
 
