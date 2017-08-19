@@ -38,6 +38,8 @@
   </section>
 </template>
 <script>
+import Moment from 'moment';
+
 export default {
   name: '',
   props: ['expense'],
@@ -49,7 +51,7 @@ export default {
   },
   computed: {
     formattedDate() {
-      return new Date(this.expense.date).toDateString().slice(4);
+      return Moment(this.expense.date).format('MMM DD, YYYY');
     },
     imageURL() {
       if (this.expense._attachments.receipt.data && this.toggled) {

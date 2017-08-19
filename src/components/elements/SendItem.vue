@@ -22,6 +22,8 @@
   </section>
 </template>
 <script>
+import Moment from 'moment';
+
 export default {
   name: '',
   props: ['expense', 'selected'],
@@ -33,7 +35,7 @@ export default {
   },
   computed: {
     formattedDate() {
-      return new Date(this.expense.date).toDateString().slice(4);
+      return Moment(this.expense.date).format('MMM DD, YYYY');
     },
     // imageURL() {
     //   console.log(this.expense);

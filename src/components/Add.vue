@@ -42,11 +42,12 @@
 </template>
 <script>
 import PouchDB from 'pouchdb';
+import Moment from 'moment';
 // import { EventBus } from './event-bus';
 import CameraInput from './elements/CameraInput';
 import ToggleSwitch from './elements/ToggleSwitch';
 
-
+console.log(Moment('2017-08-19', 'YYYY-MM-DD'));
 const db = PouchDB('ET_transactions');
 
 export default {
@@ -73,7 +74,7 @@ export default {
       const doc = {
         _id: Date.now().toString(),
         description: this.description,
-        date: new Date(this.date.replace(/-/g, '//').replace(/T.+/, '')),
+        date: Moment(this.date, 'YYYY-MM-DD'),
         amount: this.amount,
         donors: this.donors,
         colleagues: this.colleagues,

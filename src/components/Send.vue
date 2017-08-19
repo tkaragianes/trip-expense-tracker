@@ -26,6 +26,7 @@
 </template>
 <script>
 import PouchDB from 'pouchdb';
+import Moment from 'moment';
 import PDFMake from 'pdfmake/build/pdfmake';
 import VFSFonts from 'pdfmake/build/vfs_fonts';
 import SendItem from './elements/SendItem';
@@ -136,7 +137,7 @@ export default {
                 { text: 'Details', style: 'h3' },
                 '\n',
                 { text: 'Date', style: 'h4' },
-                { text: `${new Date(expense.date).toDateString()}` },
+                { text: `${Moment(expense.date).format('MMM DD, YYYY')}` },
                 { text: '\n', fontSize: 4 },
                 { text: 'Description', style: 'h4' },
                 { text: `${expense.description}` },
