@@ -17,5 +17,5 @@
     "background_color": "#f4f4f4",
     "display": "standalone",
     "Scope": "/",
-    "start_url": "/",
+    "start_url": "/"
 }
