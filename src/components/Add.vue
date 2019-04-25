@@ -74,7 +74,7 @@ export default {
       const doc = {
         _id: Date.now().toString(),
         description: this.description,
-        date: Moment(this.date, 'YYYY-MM-DD'),
+        date: Moment(this.date, 'YYYY-MM-DD').valueOf(),
         amount: this.amount,
         donors: this.donors,
         colleagues: this.colleagues,
